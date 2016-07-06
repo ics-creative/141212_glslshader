@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>プリンシェーダー</title>
+		<link rel="stylesheet" href="css/main.css">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body>
+		<script data-src="shader/vertex.js" charset="utf-8" data-name="myShader" type="x-shader/x-vertex"></script>
+		<script data-src="shader/fragment.js" charset="utf-8"  data-name="myShader" type="x-shader/x-fragment"></script>
+
+		<script src="js/jquery-2.1.1.min.js"></script>
+		<script src="js/ShaderLoader.min.js"></script>
+		<script src="js/three.min.js"></script>
+		<script src="js/OrbitControls.js"></script>
+		<script src="js/optimer_bold.typeface.js"></script>
+		<script src="js/RoundCameraController.js" charset="utf-8" ></script>
+		<script src="js/main.js" charset="utf-8" ></script>
+		<script>
+			checkSpMode();
+			preload();
+		</script>
+		<div id="canvas-wrapper"></div>
+		<div class="btn" id="drop_pudding"></div>
+	</body>
+</html>
