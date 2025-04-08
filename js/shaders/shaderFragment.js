@@ -15,7 +15,7 @@ export const shaderFragment = `
     // 反射色(RGB)
     vec3 lightColor = vec3(1.0, 1.0, 1.0);
     // 反射のシャープネス
-    float specular = 10.0;
+    float sharpness = 10.0;
 
     void main() {
         // 拡散光の計算 ---------------------------------------
@@ -41,7 +41,7 @@ export const shaderFragment = `
         // 反射ベクトルと視線ベクトルの内積(ratio2)を求める
         float ratio2 = dot(reflection, cameraVec);
         // 反射色の計算
-        vec3 specular = lightColor * pow(max(ratio2, 0.0), specular);
+        vec3 specular = lightColor * pow(max(ratio2, 0.0), sharpness);
 
         // 描画色 = テクスチャーカラー(拡散色)✕拡散強度 + 反射光
         gl_FragColor = vec4(textureColor.xyz * ratio + specular, 1.0);
