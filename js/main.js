@@ -79,7 +79,15 @@ function setUp() {
   camera.position.set(0, 50, 50);
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-  const renderer = new THREE.WebGLRenderer({ antialias: devicePixelRatio < 2 });
+  // WebGL2.0を使用するためのレンダラー設定
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("webgl2");
+  const renderer = new THREE.WebGLRenderer({
+    antialias: devicePixelRatio < 2,
+    canvas: canvas,
+    context: context,
+  });
+
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(devicePixelRatio);
   document.getElementById("canvas-wrapper").appendChild(renderer.domElement);

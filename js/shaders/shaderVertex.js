@@ -1,12 +1,22 @@
 // 頂点シェーダー
 // language=GLSL
-export const shaderVertex = `
+export const shaderVertex = `#version 300 es
+    // 頂点属性
+    in vec3 position;
+    in vec3 normal;
+    
     // フラグメントシェーダーに送る値
-    varying vec3 vNormal;
-    varying vec3 mvPosition;
-    varying vec2 vUv;
+    out vec3 vNormal;
+    out vec3 mvPosition;
+    out vec2 vUv;
 
-    // three.js経由でもらった値
+    // Three.jsから提供される変数を宣言
+    uniform mat4 modelViewMatrix;
+    uniform mat4 projectionMatrix;
+    uniform mat3 normalMatrix;
+    
+    // CPUから送られたuniform変数
+    // main.jsのtick()関数内から変更される
     uniform float frame;
     uniform float modelHeight;
     uniform vec3 swingVec;
@@ -19,15 +29,16 @@ export const shaderVertex = `
         float waveNum = 0.5;
 
         // 1.位置を0〜1.0の位置に合わせる
-        float fit0Position = position.y + modelHeight / 2.;
+        float fit0Position = position.y + modelHeight / 2.0;
         float positionNormalized = fit0Position / modelHeight;
 
         // 2.揺れ幅の調整を行う
         float strength = swingStrength * positionNormalized;
 
-        // 3.揺れの早さ(frame) 4.3Dモデル内の揺れの個数を指定する(positionNormalized * waveNum * PI ) 
+        // 3.揺れの早さ(frame) 4.3Dモデル内の揺れの個数を指定する(positionNormalized * waveNum * PI * 2.0) 
         float wave = sin(frame + positionNormalized * waveNum * PI * 2.0) * strength;
 
+        // 5.新しい頂点位置の生成
         vec3 newPosition = position + (swingVec * wave);
 
         if (newPosition.y <= position.y) {

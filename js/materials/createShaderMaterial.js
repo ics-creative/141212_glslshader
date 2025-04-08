@@ -15,7 +15,7 @@ export function createShaderMaterial() {
       type: "f", // float型
       value: 1.0,
     },
-    texture: {
+    textureSampler: {
       type: "t", // テクスチャ型
       value: texture,
     },
@@ -38,10 +38,12 @@ export function createShaderMaterial() {
   };
 
   // ShaderMaterialの作成
-  return new THREE.ShaderMaterial({
+  return new THREE.RawShaderMaterial({
     uniforms: uniformsPudding,
     // シェーダーを割り当てる
     vertexShader: shaderVertex,
     fragmentShader: shaderFragment,
+    // GLSLのバージョンを指定
+    glslVersion: THREE.GLSL3,
   });
 }
