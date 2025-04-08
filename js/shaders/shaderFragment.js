@@ -1,14 +1,22 @@
 // フラグメントシェーダー
 // language=GLSL
-export const shaderFragment = `
+export const shaderFragment = `#version 300 es
+    precision highp float;
+    
+    // Three.jsから提供される変数を明示的に宣言
+    uniform mat4 viewMatrix;
+    
     // バーテックスシェーダーから送られた値
-    varying vec3 vNormal;
-    varying vec3 mvPosition;
-    varying vec2 vUv;
+    in vec3 vNormal;
+    in vec3 mvPosition;
+    in vec2 vUv;
+    
+    // 出力カラーの定義
+    out vec4 fragColor;
 
     // CPUから送られたuniform変数
     uniform vec3 lightPosition;
-    uniform sampler2D texture;
+    uniform sampler2D textureSampler;
 
     // 光源ベクトル
     vec3 light = vec3(0, 0, 1);
@@ -31,7 +39,7 @@ export const shaderFragment = `
         // ※閾値を設定しておく
         ratio = max(1.0, ratio);
         // テクスチャ
-        vec4 textureColor = texture2D(texture, vUv);
+        vec4 textureColor = texture(textureSampler, vUv);
 
         // 反射光の計算 ---------------------------------------
         // 反射ベクトル(reflection)を求める
@@ -44,6 +52,6 @@ export const shaderFragment = `
         vec3 specular = lightColor * pow(max(ratio2, 0.0), sharpness);
 
         // 描画色 = テクスチャーカラー(拡散色)✕拡散強度 + 反射光
-        gl_FragColor = vec4(textureColor.xyz * ratio + specular, 1.0);
+        fragColor = vec4(textureColor.xyz * ratio + specular, 1.0);
     }
 `;

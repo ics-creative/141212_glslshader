@@ -1,10 +1,22 @@
 // 頂点シェーダー
 // language=GLSL
-export const shaderVertex = `
+export const shaderVertex = `#version 300 es
+    precision highp float;
+    precision highp int;
+
+    // Three.jsから提供される変数を明示的に宣言
+    uniform mat4 modelViewMatrix;
+    uniform mat4 projectionMatrix;
+    uniform mat3 normalMatrix;
+    
+    // 頂点属性
+    in vec3 position;
+    in vec3 normal;
+    
     // フラグメントシェーダーに送る値
-    varying vec3 vNormal;
-    varying vec3 mvPosition;
-    varying vec2 vUv;
+    out vec3 vNormal;
+    out vec3 mvPosition;
+    out vec2 vUv;
 
     // three.js経由でもらった値
     uniform float frame;
