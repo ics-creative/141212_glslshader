@@ -1,6 +1,6 @@
 // フラグメントシェーダー
 // language=GLSL
-export const shaderFragment = `#version 300 es
+export const shaderFragment = `
     precision mediump float;
     
     // バーテックスシェーダーから送られた値

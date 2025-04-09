@@ -1,6 +1,6 @@
 // 頂点シェーダー
 // language=GLSL
-export const shaderVertex = `#version 300 es
+export const shaderVertex = `
     // 頂点属性
     in vec3 position;
     in vec3 normal;
