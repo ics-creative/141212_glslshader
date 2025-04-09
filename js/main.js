@@ -87,9 +87,10 @@ function setUp() {
     canvas: canvas,
     context: context,
   });
-
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(devicePixelRatio);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  
   document.getElementById("canvas-wrapper").appendChild(renderer.domElement);
 
   scene.add(makeSkybox());
@@ -125,8 +126,7 @@ function setUp() {
     lightPos.y = -100;
 
     uniforms.lightPosition.value = lightPos;
-    spotLight.position.set(lightPos.x, 10, lightPos.z);
-    // spotLight.target.position.set(0, 0, 0);
+    spotLight.position.set(lightPos.x, 20, lightPos.z);
 
     pudding.position.y = animationObj.positionY;
     uniforms.frame.value = animationObj.frame;

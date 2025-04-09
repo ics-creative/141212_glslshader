@@ -5,7 +5,6 @@ export function makeSphereTransCherry() {
     color: 0xdc102c,
     colorSpace: THREE.SRGBColorSpace,
     shininess: 80,
-    specular: 0xffffff,
   });
 
   const split = 30;
